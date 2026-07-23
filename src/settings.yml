@@ -4,7 +4,7 @@ no_screen_padding: 'no'
 dark_mode: 'no'
 polling_verb: get
 framework_version: 3.1.1
-serverless_language: ''
+serverless_language: node
 polling_url: '{{ api_url }}entries?status={{ status | default: "unread" }}&direction={{ direction | default: "desc" }}&limit={{ limit | default: 30 }}&starred={{ starred | default: false }}&globally_visible={{ globally_visible | default: false }}&search={{ search | url_encode | default: "" }}&order={{ order | default: "id" }}{% if category_id %}&category_id={{ category_id }}{% endif %}'
 polling_headers: X-Auth-Token={{ token | url_encode }}
 polling_body: ''
