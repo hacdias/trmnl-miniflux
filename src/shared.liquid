@@ -17,10 +17,6 @@
 {% template title_bar %}
 <div class="title_bar">
   <span class="title">Miniflux</span>
-  <span class="instance">
-    {% if cf.direction == 'desc' %}Latest{% else %}Oldest{% endif %}
-    {% if cf.starred == true %}Starred{% endif %}
-    {% if cf.category_id != '' %}from {{ category_title }}{% endif %}
-  </span>
+  <span class="instance">{{ instance_name }}</span>
 </div>
 {% endtemplate %}

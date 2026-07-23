@@ -1,23 +1,12 @@
-# TRMNLP configuration
-# {{ env.VARIABLE }} interpolation is available here
 ---
-# auto-reload when files change (`watch: false` to disable)
 watch:
   - .env
   - .trmnlp.yml
   - src
 
-# values of custom fields (defined in src/settings.yml)
 custom_fields:
   api_url: "{{env.MINIFLUX_API_URL}}"
   token: "{{env.MINIFLUX_TOKEN}}"
-  direction: desc
-  order: published_at
-  status: unread
-  limit: 30
-  globally_visible: false
-  category_id: ''
 
-# override variables
 variables:
-  trmnl: {}
+  trmnl: { plugin_settings: { instance_name: My Plugin Instance } }
