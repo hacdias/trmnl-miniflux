@@ -1,0 +1,23 @@
+{% template entry_card %}
+<div class="item">
+  <div class="meta"><span class="index"></span></div>
+  <div class="content">
+    <span class="title title--small clamp--2">{{ entry.title }}</span>
+    <div class="flex gap--small">
+      <span class="label label--small label--underline">{{ entry.published_at | date: '%b %d, %Y' }}</span>
+      <span class="label label--small label--underline">{{ entry.feed.title | truncate: 18 }}</span>
+    </div>
+  </div>
+</div>
+{% endtemplate %}
+
+{% template title_bar %}
+<div class="title_bar">
+  <span class="title">Miniflux</span>
+  <span class="instance">
+    {% if cf.direction == 'desc' %}Latest{% else %}Oldest{% endif %}
+    {% if cf.starred == true %}Starred{% endif %}
+    {% if cf.category_id != '' %}from {{ category_title }}{% endif %}
+  </span>
+</div>
+{% endtemplate %}

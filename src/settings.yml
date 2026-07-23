@@ -1,0 +1,115 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+framework_version: 3.1.1
+serverless_language: ''
+polling_url: '{{ api_url }}entries?status={{ status | default: "unread" }}&direction={{ direction | default: "desc" }}&limit={{ limit | default: 30 }}&starred={{ starred | default: false }}&globally_visible={{ globally_visible | default: false }}&search={{ search | url_encode | default: "" }}&order={{ order | default: "id" }}{% if category_id %}&category_id={{ category_id }}{% endif %}'
+polling_headers: X-Auth-Token={{ token | url_encode }}
+polling_body: ''
+id: 391377
+oauth_enabled: 'false'
+oauth_pkce_enabled: 'no'
+oauth_authorize_url: ''
+oauth_token_url: ''
+oauth_scopes: ''
+oauth_scope_separator: ''
+oauth_refresh_url: ''
+oauth_auth_params: ''
+oauth_token_headers: ''
+oauth_token_site: ''
+oauth_token_params: ''
+oauth_token_request_auth_method: ''
+oauth_body_format: ''
+oauth_token_response_metadata: ''
+oauth_authorization_method: ''
+oauth_refresh_params: ''
+oauth_token_field_name: ''
+oauth_expiry_field_name: ''
+oauth_expiry_strategy: ''
+oauth_fixed_expiry_ms: ''
+custom_fields:
+- keyname: api_url
+  field_type: url
+  name: Miniflux API Endpoint
+  description: <strong class="text-red-600">Required.</strong> Address of Miniflux API.
+  placeholder: https://flux.mydomain.com/v1/
+  help_text: Please include http:// or https:// and leading slash (/)
+  optional: false
+- keyname: token
+  field_type: password
+  name: Token
+  description: <strong class="text-red-600">Required.</strong> Miniflux API Token.
+  placeholder: your-token-from-miniflux
+  optional: false
+- keyname: status
+  field_type: select
+  options:
+  - unread
+  - read
+  - removed
+  name: Entry Status
+  default: unread
+  optional: false
+  description: Which status of entries to pull?
+- keyname: limit
+  field_type: number
+  placeholder: '30'
+  name: Entry Limit
+  default: 30
+  description: The maximum amount of entries to pull.
+- keyname: category_id
+  field_type: number
+  placeholder: '5'
+  name: Category ID Filter
+  optional: true
+  description: <strong class="text-green-600">Optional.</strong> Filter entries from a specific category ID.
+- keyname: search
+  field_type: string
+  optional: true
+  name: Search Query
+  description: <strong class="text-green-600">Optional.</strong> Term to filter by.
+  placeholder: recipe
+- keyname: starred
+  field_type: select
+  optional: false
+  options:
+  - true
+  - false
+  default: false
+  name: Only Get Starred Entries
+  description: This will remove non-starred entries from the response.
+- keyname: globally_visible
+  field_type: select
+  optional: false
+  options:
+  - true
+  - false
+  default: false
+  name: Globally Visible Only
+  description: Only include entries from feeds/categories not hidden from global views.
+- keyname: order
+  field_type: select
+  options:
+  - id
+  - status
+  - published_at
+  - category_title
+  - category_id
+  name: Order Entries
+  default: id
+  optional: false
+  description: Which property to order the entries by?
+- keyname: direction
+  field_type: select
+  options:
+  - asc
+  - desc
+  name: Sorting Order
+  optional: false
+  default: desc
+  description: Sort entries in a ascending/descending manner.
+name: Miniflux Feed
+refresh_interval: 15
