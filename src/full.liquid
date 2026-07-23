@@ -3,8 +3,10 @@
 <div class="layout layout--col gap--space-between">
   <div class="columns" data-overflow-max-cols="2" data-overflow-counter="true">
     <div class="column">
-      {% for entry in entries %}{% render "entry_card", entry: entry %}{% endfor %}
+      {% for entry in entries -%}
+        {%- render 'entry_card', entry: entry, show_category: cf.show_category -%}
+      {%- endfor %}
     </div>
   </div>
 </div>
-{% render "title_bar", cf: cf, category_title: entries[0].feed.category.title %}
+{% render 'title_bar', cf: cf, category_title: entries[0].feed.category.title %}

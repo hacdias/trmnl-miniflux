@@ -92,5 +92,14 @@ custom_fields:
   optional: false
   default: desc
   description: Sort entries in a ascending/descending manner.
+- keyname: show_category
+  field_type: select
+  optional: false
+  options:
+  - true
+  - false
+  default: true
+  name: Show Category Badge
+  description: Show each entry's category as a badge.
 name: Miniflux Feed
 refresh_interval: 15
