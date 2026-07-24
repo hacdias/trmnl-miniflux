@@ -1,6 +1,6 @@
 # TRMNL Miniflux Plugin
 
-A [TRMNL](https://trmnl.com/) plugin which displays your latest [Miniflux](https://miniflux.app/) entries.
+A [TRMNL](https://trmnl.com/) plugin which displays your latest [Miniflux](https://miniflux.app/) entries. Originally inspired by the original [plugin](https://trmnl.com/recipes/33478).
 
 ## Development
 

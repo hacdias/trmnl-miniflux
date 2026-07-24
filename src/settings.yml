@@ -16,7 +16,7 @@ custom_fields:
   name: About This Plugin
   field_type: author_bio
   category: news,entertainment
-  description: This plugin was created by Henrique Dias.
+  description: This plugin was created by Henrique Dias. Help improve this plugin on GitHub.
   learn_more_url: https://hacdias.com
   github_url: https://github.com/hacdias/trmnl-miniflux
 - keyname: api_url
