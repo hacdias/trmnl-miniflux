@@ -7,6 +7,13 @@ watch:
 custom_fields:
   api_url: "{{env.MINIFLUX_API_URL}}"
   token: "{{env.MINIFLUX_TOKEN}}"
+  status: [unread]
+  limit: 30
+  order: id
+  direction: desc
+  starred: false
+  globally_visible: false
+  show_category: true
 
 variables:
   trmnl: { plugin_settings: { instance_name: My Plugin Instance } }

@@ -5,36 +5,44 @@ dark_mode: 'no'
 polling_verb: get
 framework_version: 3.1.1
 serverless_language: node
-polling_url: '{{ api_url }}entries?status={{ status | default: "unread" }}&direction={{ direction | default: "desc" }}&limit={{ limit | default: 30 }}&starred={{ starred | default: false }}&globally_visible={{ globally_visible | default: false }}&search={{ search | url_encode | default: "" }}&order={{ order | default: "id" }}{% if category_id %}&category_id={{ category_id }}{% endif %}'
+polling_url: '{{ api_url }}entries?limit={{ limit }}&order={{ order }}&direction={{ direction }}{% for s in status %}&status={{ s }}{% endfor %}{% if starred == true or starred == "true" %}&starred=true{% endif %}{% if globally_visible == true or globally_visible == "true" %}&globally_visible=true{% endif %}{% if search != blank %}&search={{ search | url_encode }}{% endif %}{% if category_id != blank %}&category_id={{ category_id }}{% endif %}'
 polling_headers: X-Auth-Token={{ token | url_encode }}
 polling_body: ''
-id: 391377
+id: 392974
 oauth_enabled: 'false'
 oauth_pkce_enabled: 'no'
 custom_fields:
+- keyname: author_info
+  name: About This Plugin
+  field_type: author_bio
+  category: news,productivity,entertainment
+  description: This plugin was created by Henrique Dias.
+  learn_more_url: https://hacdias.com
+  github_url: https://github.com/hacdias/trmnl-miniflux
 - keyname: api_url
   field_type: url
   name: Miniflux API Endpoint
-  description: <strong class="text-red-600">Required.</strong> Address of Miniflux API.
+  description: Endpoint of your Miniflux API.
   placeholder: https://flux.mydomain.com/v1/
-  help_text: Please include http:// or https:// and leading slash (/)
+  help_text: Please include http:// or https:// and trailing slash (/)
   optional: false
 - keyname: token
   field_type: password
   name: Token
-  description: <strong class="text-red-600">Required.</strong> Miniflux API Token.
+  description: Miniflux API Token.
   placeholder: your-token-from-miniflux
   optional: false
 - keyname: status
   field_type: select
+  multiple: true
   options:
   - unread
   - read
-  - removed
   name: Entry Status
+  optional: true
   default: unread
-  optional: false
-  description: Which status of entries to pull?
+  description: Which entry statuses to pull? Defaults to unread; clear to include all.
+  help_text: Hold ⌘ (macOS) or Ctrl to select multiple statuses.
 - keyname: limit
   field_type: number
   placeholder: '30'
@@ -46,28 +54,20 @@ custom_fields:
   placeholder: '5'
   name: Category ID Filter
   optional: true
-  description: <strong class="text-green-600">Optional.</strong> Filter entries from a specific category ID.
+  description: Filter entries from a specific category ID.
 - keyname: search
   field_type: string
   optional: true
   name: Search Query
-  description: <strong class="text-green-600">Optional.</strong> Term to filter by.
+  description: Term to filter by.
   placeholder: recipe
 - keyname: starred
-  field_type: select
-  optional: false
-  options:
-  - true
-  - false
+  field_type: boolean
   default: false
   name: Only Get Starred Entries
-  description: This will remove non-starred entries from the response.
+  description: When enabled, only starred (favorite) entries are returned.
 - keyname: globally_visible
-  field_type: select
-  optional: false
-  options:
-  - true
-  - false
+  field_type: boolean
   default: false
   name: Globally Visible Only
   description: Only include entries from feeds/categories not hidden from global views.
@@ -77,8 +77,12 @@ custom_fields:
   - id
   - status
   - published_at
-  - category_title
+  - created_at
+  - changed_at
+  - title
+  - author
   - category_id
+  - category_title
   name: Order Entries
   default: id
   optional: false
@@ -88,10 +92,10 @@ custom_fields:
   options:
   - asc
   - desc
-  name: Sorting Order
+  name: Sort Direction
   optional: false
   default: desc
-  description: Sort entries in a ascending/descending manner.
+  description: Sort entries in an ascending/descending manner.
 - keyname: show_category
   field_type: select
   optional: false
@@ -101,5 +105,6 @@ custom_fields:
   default: true
   name: Show Category Badge
   description: Show each entry's category as a badge.
-name: Miniflux Feed
+name: Miniflux
+description: Display your Miniflux feed entries
 refresh_interval: 15
