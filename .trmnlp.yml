@@ -16,4 +16,4 @@ custom_fields:
   show_category: true
 
 variables:
-  trmnl: { plugin_settings: { instance_name: My Plugin Instance } }
+  trmnl: { plugin_settings: { instance_name: Miniflux Instance } }

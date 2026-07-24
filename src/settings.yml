@@ -75,14 +75,9 @@ custom_fields:
   field_type: select
   options:
   - id
-  - status
   - published_at
   - created_at
   - changed_at
-  - title
-  - author
-  - category_id
-  - category_title
   name: Order Entries
   default: id
   optional: false
