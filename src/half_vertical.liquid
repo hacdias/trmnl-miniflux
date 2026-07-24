@@ -1,11 +1,15 @@
 {% assign cf = trmnl.plugin_settings.custom_fields_values %}
 <div class="layout layout--col gap--space-between">
-  <div class="columns" data-overflow-max-cols="1" data-overflow-counter="true">
-    <div class="column">
-      {% for entry in entries -%}
-        {%- render 'entry_card', entry: entry, show_category: cf.show_category -%}
-      {%- endfor %}
+  {% if entries.size > 0 -%}
+    <div class="columns" data-overflow-max-cols="1" data-overflow-counter="true">
+      <div class="column">
+        {% for entry in entries -%}
+          {%- render 'entry_card', entry: entry, show_category: cf.show_category -%}
+        {%- endfor %}
+      </div>
     </div>
-  </div>
+  {%- else -%}
+    {% render 'empty_state' %}
+  {%- endif %}
 </div>
 {% render 'title_bar', instance_name: trmnl.plugin_settings.instance_name, direction: cf.direction %}
