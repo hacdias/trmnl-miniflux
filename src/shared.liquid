@@ -2,7 +2,7 @@
 <div class="item">
   <div class="meta"><span class="index"></span></div>
   <div class="content">
-    <span class="title title--small clamp--2">{{ entry.title }}</span>
+    <span class="title title--small" data-clamp="2">{{ entry.title }}</span>
     <div class="flex gap--small">
       <span class="label label--small label--underline">{{ entry.published_at | date: '%b %d, %Y' }}</span>
       <span class="label label--small label--underline">{{ entry.feed.title | truncate: 18 }}</span>
