@@ -3,7 +3,7 @@ strategy: polling
 no_screen_padding: 'no'
 dark_mode: 'no'
 polling_verb: get
-framework_version: 3.1.1
+framework_version: 3.4.3
 serverless_language: node
 polling_url: '{{ api_url }}entries?limit={{ limit }}&order={{ order }}&direction={{ direction }}{% for s in status %}&status={{ s }}{% endfor %}{% if starred == true or starred == "true" %}&starred=true{% endif %}{% if globally_visible == true or globally_visible == "true" %}&globally_visible=true{% endif %}{% if search != blank %}&search={{ search | url_encode }}{% endif %}{% if category_id != blank %}&category_id={{ category_id }}{% endif %}'
 polling_headers: X-Auth-Token={{ token | url_encode }}
@@ -92,11 +92,7 @@ custom_fields:
   default: desc
   description: Sort entries in an ascending/descending manner.
 - keyname: show_category
-  field_type: select
-  optional: false
-  options:
-  - true
-  - false
+  field_type: boolean
   default: true
   name: Show Category Badge
   description: Show each entry's category as a badge.
